@@ -36,6 +36,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
+    mutating func shuffe() {
+        cards.shuffle()
+    }
+    
     func index(of card: Card) -> Int? {
         cards.firstIndex { $0.id == card.id }
     }
@@ -48,14 +52,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards.append(Card(id: pairIndex * 2, content: content))
             cards.append(Card(id: pairIndex * 2 + 1, content: content))
         }
-    }
-    
-    struct Card: Identifiable {
-        let id: Int
-        let content: CardContent
-        
-        var isFaceUp = false
-        var isMatched = false
+        cards.shuffle()
+        print("0 - \(cards.lastIndex { $0.content == cards[0].content}!)")
     }
 }
 
